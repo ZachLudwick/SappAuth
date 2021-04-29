@@ -1,0 +1,102 @@
+<html>
+<head>
+    <title>Sapp | Login</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="nav-login" id="nav-login-div">
+    <header>
+        <a href="#" class="nav-text">Sapp</a>
+        <nav>
+            <ul class="nav-links">
+                <li class="n-li"><a href="#">Download</a></li>
+                <li class="n-li"><a href="#">Why Sapp?</a></li>
+                <li class="n-li"><a href="#">Safety</a></li>
+                <li class="n-li"><a href="#">Support</a></li>
+            </ul>
+            <a class="cta"><button onclick="loginButtonClick()">Login</button></a>
+        </nav>
+    </header>
+</div>
+
+<div class="nav-user" id="nav-user-div">
+    <header>
+        <a href="#" class="nav-text">Sapp</a>
+        <nav>
+            <ul class="nav-links">
+                <li class="n-li"><a href="#">Download</a></li>
+                <li class="n-li"><a href="#">Why Sapp?</a></li>
+                <li class="n-li"><a href="#">Safety</a></li>
+                <li class="n-li"><a href="#">Support</a></li>
+            </ul>
+            <a href="#" class="cta">Open</a>
+        </nav>
+    </header>
+</div>
+
+<div id="login_div" class="main-div">
+    <h3>Sapp | Login</h3>
+    <input type="email" placeholder="Email" id="email_field" />
+    <input type="password" placeholder="Password" id="password_field" />
+    <button class="login-buttonMain-1" onclick="login()">Login</button>
+    <div class="need-account-div">
+        <span class="needAccount-S1">Need an account?</span>
+        <button onclick="registerButtonClick()" type="button" class="registerButton-small1">
+            <div class="registerButton-div1-small">Register</div>
+        </button>
+    </div>
+</div>
+
+<div id="user_div" class="loggedin-div">
+    <h3>You are now logged in.</h3>
+    <p id="user_para">Unless you have a time machine, this isn't possible</p>
+    <button class="login-buttonMain-1" onclick="logout()">Logout</button>
+</div>
+
+<div class="register-user" id="register-user-div">
+    <h3>Sapp | Register</h3>
+    <input type="email" placeholder="Email" id="register_email_field">
+    <!--- <input type="text" placeholder="Full name" id="register_fullname_field"> --->
+    <input type="password" placeholder="Password" id="register_password_field">
+
+    <button onclick="register()" type="button" class="register-submit-button">
+        <div class="register-submit-button-text">Sign Up</div>
+    </button>
+    <div class="already-have-account-div">
+        <span class="already-have-account-s1">Already have an account?</span>
+        <button onclick="loginButtonClick()" type="button" class="already-have-account-button">Login</button>
+    </div>
+</div>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.4.2/firebase.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-analytics.js"></script>
+
+<script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyAKr2SeLSaK0ewf7oZxMimS7Io1t8eTS4s",
+        authDomain: "socialsappapp.firebaseapp.com",
+        projectId: "socialsappapp",
+        storageBucket: "socialsappapp.appspot.com",
+        messagingSenderId: "849394702645",
+        appId: "1:849394702645:web:272fbd6ef6dd13459b147c",
+        measurementId: "G-S6GGHWZM1W"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+</script>
+<script src="js/index.js"></script>
+
+
+</body>
+</html>
+
