@@ -114,10 +114,18 @@ function resetPassword() {
         doc.getElementById('reset_password_error').innerHTML = "Successfully sent email. Check inbox & spam."
     }).catch(function (error) {
         // An error occoured
-        var jsonStringify = JSON.stringify(error)
-        console.log(jsonStringify);
+        var errorCode = error.code;
+        if (errorCode == 'auth/invalid-email') {
+            doc.getElementById('reset_password_error').innerHTML = "Email not formatted properly."
+        } else if (errorCode == 'auth/user-not-found') {
+            doc.getElementById('reset_password_error').innerHTML = "Email not found."
+        } else {
+            doc.getElementById('reset_password_error').innerHTML = "An error occurred."
+        }
 
-        doc.getElementById('reset_password_error').innerHTML = error
+        console.log(errorCode)
+
+
         doc.getElementById('reset_password_error').style.display = "block";
     });
 }
