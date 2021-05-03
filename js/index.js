@@ -5,6 +5,8 @@ var doc = document
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         // User is signed in.
+        doc.getElementById('reset_password_error').style.display = "none";
+        doc.getElementById('reset_password_success').style.display = 'none';
         document.getElementById('reset-pw').style.display = "none";
 
         document.getElementById('nav-user-div').style.display = "block";
@@ -24,6 +26,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     } else {
         // User isn't singed in.
+        doc.getElementById('reset_password_error').style.display = "none";
+        doc.getElementById('reset_password_success').style.display = 'none';
         document.getElementById('reset-pw').style.display = "none";
 
         document.getElementById('register-user-div').style.display = "none";
@@ -39,11 +43,21 @@ firebase.auth().onAuthStateChanged(function(user) {
 });
 
 function loginButtonClick() {
+
+    doc.getElementById('reset_password_success').style.display = "none"
+    doc.getElementById('reset_password_error').style.display = "none";
+    doc.getElementById('reset-pw').style.display = "none"
+
     document.getElementById('login_div').style.display = "block";
     document.getElementById('register-user-div').style.display = "none";
+
 }
 
 function registerButtonClick() {
+    doc.getElementById('reset_password_success').style.display = "none"
+    doc.getElementById('reset_password_error').style.display = "none";
+    doc.getElementById('reset-pw').style.display = "none"
+
     document.getElementById('register-user-div').style.display = "block";
     document.getElementById('login_div').style.display = "none";
 }
@@ -94,9 +108,12 @@ function login(){
 
 function resetPasswordHandle() {
     document.getElementById('login_div').style.display = "none";
+    doc.getElementById('register-user-div').style.display = "none";
+    doc.getElementById('user_div').style.display = "none";
     document.getElementById('reset-pw').style.display = "block";
 
     doc.getElementById('reset_password_error').style.display = "none"
+    doc.getElementById('reset_password_success').style.display = 'none';
 
 }
 
@@ -109,9 +126,11 @@ function resetPassword() {
         // Email Sent.
         console.log("DEBUG: Reset Password Email Sent.")
 
+        doc.getElementById('reset_password_success').style.display = "none"
         doc.getElementById('reset_password_error').style.display = "none";
-        doc.getElementById('reset_password_error').style.display = "block";
-        doc.getElementById('reset_password_error').innerHTML = "Successfully sent email. Check inbox & spam."
+        doc.getElementById('reset_password_success').style.display = "block";
+        doc.getElementById('reset_password_success').innerHTML = "Successfully sent email. Check inbox & spam."
+
     }).catch(function (error) {
         // An error occoured
         var errorCode = error.code;
@@ -119,8 +138,10 @@ function resetPassword() {
             doc.getElementById('reset_password_error').innerHTML = "Email not formatted properly."
         } else if (errorCode == 'auth/user-not-found') {
             doc.getElementById('reset_password_error').innerHTML = "Email not found."
+        } else if (errorCode == 'auth/too-many-requests') {
+            doc.getElementById('reset_password_error').innerHTML = "You are being rate limited."
         } else {
-            doc.getElementById('reset_password_error').innerHTML = "An error occurred."
+            doc.getElementById('reset_password_error').innerHTML = "An unknown error occoured. Please report it!!  ERROR CODE: " + errorCode
         }
 
         console.log(errorCode)
