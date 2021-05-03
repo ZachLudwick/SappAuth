@@ -83,3 +83,7 @@ input, .login-buttonMain-1 {
     -moz-transition: 0.3s;
 }
 
+.span_reset_error {
+    display: none;
+}
+

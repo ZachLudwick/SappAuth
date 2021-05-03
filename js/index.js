@@ -1,8 +1,11 @@
-url = "https://sapp-app.tk"
+var auth = firebase.auth();
+var url = "https://sapp-app.tk"
+var doc = document
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         // User is signed in.
+        document.getElementById('reset-pw').style.display = "none";
 
         document.getElementById('nav-user-div').style.display = "block";
         document.getElementById('nav-login-div').style.display = "none";
@@ -21,6 +24,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     } else {
         // User isn't singed in.
+        document.getElementById('reset-pw').style.display = "none";
+
         document.getElementById('register-user-div').style.display = "none";
 
         document.getElementById('nav-user-div').style.display = "none";
@@ -87,8 +92,34 @@ function login(){
 
 }
 
+function resetPasswordHandle() {
+    document.getElementById('login_div').style.display = "none";
+    document.getElementById('reset-pw').style.display = "block";
+
+    doc.getElementById('reset_password_error').style.display = "none"
+
+}
+
 function resetPassword() {
-    window.location.href = url + "/" + "forgot-password"
+    var resetUserPasswordEmailField = document.getElementById('reset_pw_email_field').value;
+
+    doc.getElementById('reset_password_error').style.display = "none";
+
+    auth.sendPasswordResetEmail(resetUserPasswordEmailField).then(function () {
+        // Email Sent.
+        console.log("DEBUG: Reset Password Email Sent.")
+
+        doc.getElementById('reset_password_error').style.display = "none";
+        doc.getElementById('reset_password_error').style.display = "block";
+        doc.getElementById('reset_password_error').innerHTML = "Successfully sent email. Check inbox & spam."
+    }).catch(function (error) {
+        // An error occoured
+        var jsonStringify = JSON.stringify(error)
+        console.log(jsonStringify);
+
+        doc.getElementById('reset_password_error').innerHTML = error
+        doc.getElementById('reset_password_error').style.display = "block";
+    });
 }
 
 function logout(){

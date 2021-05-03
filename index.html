@@ -43,7 +43,7 @@
     <button class="login-buttonMain-1" onclick="login()">Login</button>
     <div class="forgot-password-div">
         <span class="forgotPassword-s">Forgot your password?</span>
-        <button onclick="resetPassword()" type="button" class="forgotPassword-button">
+        <button onclick="resetPasswordHandle()" type="button" class="forgotPassword-button">
             <div class="forgotPasswordButton-div">Get help singing in.</div>
         </button>
     </div>
@@ -53,6 +53,13 @@
             <div class="registerButton-div1-small">Register</div>
         </button>
     </div>
+</div>
+
+<div class="reset-pw-div" id="reset-pw">
+    <h3>Sapp | Enter Your Email.</h3>
+    <input type="email" placeholder="Email" id="reset_pw_email_field">
+    <button class="reset_password_button_submit" type="button" onclick="resetPassword()">Reset Password</button>
+    <span class="span_reset_error" id="reset_password_error">Error</span>
 </div>
 
 <div id="user_div" class="loggedin-div">
