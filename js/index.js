@@ -20,7 +20,8 @@ firebase.auth().onAuthStateChanged(function(user) {
         if(user != null){
 
             var email_id = user.email;
-            document.getElementById("user_para").innerHTML = "Welcome User : " + email_id;
+            var uid = user.uid;
+            document.getElementById("user_para").innerHTML = "Welcome User : " + email_id + "UID = " + uid;
             document.getElementById('auth-login-button').innerHTML = "Open"
         }
 
@@ -78,15 +79,42 @@ function register() {
     firebase.auth().createUserWithEmailAndPassword(userEmail, userPass)
         .then((userCredential) => {
             // Signed in
-            var user = userCredential.user;
-            location.reload()
+            var currentUser = auth.currentUser;
+            var uid = currentUser.uid;
+            console.log(uid)
         })
         .catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
 
-            window.alert("Error : " + errorMessage + errorCode)
+            window.alert("Error : " + errorCode)
         })
+}
+
+function setUserValues() {
+    // Firebase vars
+    var currentUser = auth.currentUser;
+    var uid = currentUser.uid;
+    var email = currentUser.email
+
+    // Input values
+
+    var fullname = doc.getElementById('register_fullname_field').value;
+    var username = doc.getElementById('register_username_field').value;
+
+
+    db.collection("users").doc(uid).set({
+        username: username,
+        fullname: fullname
+    })
+        .then(() => {
+            console.log("DOne.")
+        })
+        .catch((error) => {
+            console.error(error)
+        });
+
+
 }
 
 function login(){
