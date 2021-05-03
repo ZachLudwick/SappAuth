@@ -1,3 +1,5 @@
+url = "https://sapp-app.tk"
+
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         // User is signed in.
@@ -83,6 +85,10 @@ function login(){
         // ...
     });
 
+}
+
+function resetPassword() {
+    window.location.href = url + "/" + "forgot-password"
 }
 
 function logout(){
